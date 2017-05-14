@@ -8,7 +8,7 @@ import protobuf.generate.internal.Internal;
 import java.io.IOException;
 
 /**
- * Created by Qzy on 2016/1/30.
+ * Created by lzq on 2016/1/30.
  */
 public class ParseRegistryMap {
     public static final int GTRANSFER = 900;
