@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by Dell on 2016/2/15.
- * 模拟客户端聊天：自己给自己发消息
+ * Created by lzq on 2016/2/15.
+ * 智能硬件设备与服务器的通信
  */
 public class ClientHandler extends SimpleChannelInboundHandler<Message> {
     public static ChannelHandlerContext _gateClientConnection;
@@ -96,6 +96,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
                     logger.info("Unknow code: {}", code);
             }
         } else if(msg instanceof Chat.SPrivateChat) {
+            System.out.println("client received: "+ ((Chat.SPrivateChat) msg).getContent());
             logger.info("{} receiced chat message: {}.Total:{}", _userId, ((Chat.SPrivateChat) msg).getContent(), ++count);
         }
 
