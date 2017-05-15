@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import protobuf.ParseRegistryMap;
 import protobuf.Utils;
 import protobuf.analysis.ParseMap;
-import protobuf.generate.cli2srv.chat.Chat;
+import protobuf.generate.device.chat.Device;
 import protobuf.generate.internal.Internal;
 
 /**
@@ -40,7 +40,7 @@ public class AuthLogicConnectionHandler extends SimpleChannelInboundHandler<Mess
         Message msg = ParseMap.getMessage(ptoNum, gt.getMsg().toByteArray());
 
         IMHandler handler = null;
-        if(msg instanceof Chat.CPrivateChat) {
+        if(msg instanceof Device.CDevice) {
             handler = HandlerManager.getHandler(ptoNum, gt.getUserId(), -1L, msg, AuthServerHandler.getGateAuthConnection());
         } else {
             logger.error("Error Messgae Type: {}", msg.getClass());

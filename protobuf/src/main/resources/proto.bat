@@ -8,7 +8,7 @@ set def_internal_java=(internal)
 
 for %%A in %def_cli_java% do (
     echo generate cli protocol java code: %%A.proto
-    protoc.exe --java_out=%OUT% ./cli_def/%%A.proto
+    protoc.exe --java_out=%OUT% ./device_def/%%A.proto
 )
 
 for %%A in %def_internal_java% do (

@@ -4,7 +4,7 @@ import auth.handler.AuthServerHandler;
 import io.netty.buffer.ByteBuf;
 import protobuf.ParseRegistryMap;
 import protobuf.Utils;
-import protobuf.generate.cli2srv.login.Auth;
+import protobuf.generate.device.login.Auth;
 import protobuf.generate.internal.Internal;
 
 /**

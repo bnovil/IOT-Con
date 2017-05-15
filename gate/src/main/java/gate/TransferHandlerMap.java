@@ -8,8 +8,8 @@ import gate.utils.ClientConnectionMap;
 import io.netty.buffer.ByteBuf;
 import protobuf.Utils;
 import protobuf.analysis.ParseMap;
-import protobuf.generate.cli2srv.chat.Chat;
-import protobuf.generate.cli2srv.login.Auth;
+import protobuf.generate.device.chat.Device;
+import protobuf.generate.device.login.Auth;
 import protobuf.generate.internal.Internal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +47,7 @@ public class TransferHandlerMap {
                 logger.error("User not login.");
                 return;
             }
-            if (msg instanceof Chat.CPrivateChat) {
+            if (msg instanceof Device.CDevice) {
                 byteBuf = Utils.pack2Server(msg, ParseMap.getPtoNum(msg), conn.getNetId(), Internal.Dest.Logic, conn.getUserId());
             }
             GateLogicConnectionHandler.getGatelogicConnection().writeAndFlush(byteBuf);
@@ -55,7 +55,7 @@ public class TransferHandlerMap {
 
         ClientMessage.registerTranferHandler(1000, t2Auth, Auth.CLogin.class);
         ClientMessage.registerTranferHandler(1001, t2Auth, Auth.CRegister.class);
-        ClientMessage.registerTranferHandler(1003, t2Logic, Chat.CPrivateChat.class);
+        ClientMessage.registerTranferHandler(1003, t2Logic, Device.CDevice.class);
 
 //        ClientMessage.registerTranferHandler(1000, ClientMessage::transfer2Auth, Auth.CLogin.class);
 //        ClientMessage.registerTranferHandler(1001, ClientMessage::transfer2Auth, Auth.CRegister.class);

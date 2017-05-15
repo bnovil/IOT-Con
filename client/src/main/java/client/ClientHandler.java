@@ -7,8 +7,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.Utils;
-import protobuf.generate.cli2srv.chat.Chat;
-import protobuf.generate.cli2srv.login.Auth;
+
+import protobuf.generate.device.chat.Device;
+import protobuf.generate.device.login.Auth;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
@@ -95,9 +96,9 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
                 default:
                     logger.info("Unknow code: {}", code);
             }
-        } else if(msg instanceof Chat.SPrivateChat) {
-            System.out.println("client received: "+ ((Chat.SPrivateChat) msg).getContent());
-            logger.info("{} receiced chat message: {}.Total:{}", _userId, ((Chat.SPrivateChat) msg).getContent(), ++count);
+        } else if(msg instanceof Device.CDevice ) {
+            System.out.println("client received: "+ ((Device.CDevice) msg).getContent());
+            logger.info("{} receiced chat message: {}.Total:{}", _userId, ((Device.CDevice) msg).getContent(), ++count);
         }
 
         //这样设置的原因是，防止两方都阻塞在输入上
@@ -116,12 +117,13 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
         String content = "Hello, I am Tom! Message number: "+n;
 //        logger.info("{} Send Message: {} to {}", _userId, content, _friend);
 
-        Chat.CPrivateChat.Builder cp = Chat.CPrivateChat.newBuilder();
-        cp.setContent(content);
-        cp.setSelf(_userId);
-        cp.setDest(_userId);
+//        Chat.CPrivateChat.Builder cp = Chat.CPrivateChat.newBuilder();
+        Device.CDevice.Builder cd = Device.CDevice.newBuilder();
+        cd.setContent(content);
+        cd.setSelf(_userId);
+        cd.setDest(_userId);
 
-        ByteBuf byteBuf = Utils.pack2Client(cp.build());
+        ByteBuf byteBuf = Utils.pack2Client(cd.build());
         _gateClientConnection.writeAndFlush(byteBuf);
     }
 

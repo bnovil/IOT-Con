@@ -1,18 +1,10 @@
 package gate;
 
 import com.google.protobuf.Message;
-import gate.handler.GateAuthConnectionHandler;
-import gate.handler.GateLogicConnectionHandler;
 import gate.utils.ClientConnection;
-import gate.utils.ClientConnectionMap;
-import io.netty.buffer.ByteBuf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import protobuf.Utils;
-import protobuf.analysis.ParseMap;
-import protobuf.generate.cli2srv.chat.Chat;
-import protobuf.generate.cli2srv.login.Auth;
-import protobuf.generate.internal.Internal;
+
 
 import java.io.IOException;
 import java.util.HashMap;

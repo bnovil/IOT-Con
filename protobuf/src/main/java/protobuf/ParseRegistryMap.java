@@ -1,8 +1,8 @@
 package protobuf;
 
 import protobuf.analysis.ParseMap;
-import protobuf.generate.cli2srv.chat.Chat;
-import protobuf.generate.cli2srv.login.Auth;
+import protobuf.generate.device.chat.Device;
+import protobuf.generate.device.login.Auth;
 import protobuf.generate.internal.Internal;
 
 import java.io.IOException;
@@ -30,7 +30,10 @@ public class ParseRegistryMap {
         ParseMap.register(CREGISTER, Auth.CRegister::parseFrom, Auth.CRegister.class);
         ParseMap.register(SRESPONSE, Auth.SResponse::parseFrom, Auth.SResponse.class);
 
-        ParseMap.register(CPRIVATECHAT, Chat.CPrivateChat::parseFrom, Chat.CPrivateChat.class);
-        ParseMap.register(SPRIVATECHAT, Chat.SPrivateChat::parseFrom, Chat.SPrivateChat.class);
+//        ParseMap.register(CPRIVATECHAT, Chat.CPrivateChat::parseFrom, Chat.CPrivateChat.class);
+//        ParseMap.register(SPRIVATECHAT, Chat.SPrivateChat::parseFrom, Chat.SPrivateChat.class);
+
+        ParseMap.register(CPRIVATECHAT, Device.CDevice::parseFrom, Device.CDevice.class);
+        ParseMap.register(SPRIVATECHAT, Device.CDevice::parseFrom, Device.CDevice.class);
     }
 }

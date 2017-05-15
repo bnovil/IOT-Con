@@ -2,12 +2,12 @@ package logic;
 
 import com.google.protobuf.Message;
 import io.netty.channel.ChannelHandlerContext;
-import logic.handler.CPrivateChatHandler;
+import logic.handler.CDeviceHandler;
 import logic.handler.GreetHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.analysis.ParseMap;
-import protobuf.generate.cli2srv.chat.Chat;
+import protobuf.generate.device.chat.Device;
 import protobuf.generate.internal.Internal;
 
 import java.lang.reflect.Constructor;
@@ -46,8 +46,12 @@ public class HandlerManager {
         return constructor.newInstance(userId, netId, msg, ctx);
     }
 
+    /**
+     * 处理消息的Handler
+     */
+
     public static void initHandlers() {
         HandlerManager.register(Internal.Greet.class, GreetHandler.class);
-        HandlerManager.register(Chat.CPrivateChat.class, CPrivateChatHandler.class);
+        HandlerManager.register(Device.CDevice.class, CDeviceHandler.class);
     }
 }

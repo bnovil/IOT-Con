@@ -12,14 +12,14 @@ import protobuf.code.PacketDecoder;
 import protobuf.code.PacketEncoder;
 
 /**
- * Created by Dell on 2016/2/15.
+ * Created by lzq on 2017/2/15.
  * Simple client for module test
  */
 public class Client {
     static final String HOST = System.getProperty("host", "127.0.0.1");
     static final int PORT = Integer.parseInt(System.getProperty("port", "9090"));
     public static final int clientNum = Integer.parseInt(System.getProperty("size", "1"));
-    public static final int frequency = 100;  //ms
+    public static final int frequency = 2000;  //ms
 
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
 

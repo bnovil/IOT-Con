@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.ParseRegistryMap;
 import protobuf.Utils;
-import protobuf.generate.cli2srv.chat.Chat;
+import protobuf.generate.device.chat.Device;
 import protobuf.generate.internal.Internal;
 
 /**
@@ -25,7 +25,7 @@ public class CPrivateChatHandler extends IMHandler{
 
     @Override
     protected void excute(Worker worker) throws TException {
-        Chat.CPrivateChat msg = (Chat.CPrivateChat) _msg;
+        Device.CDevice msg = (Device.CDevice) _msg;
         ByteBuf byteBuf;
 
         String dest = msg.getDest();
@@ -35,7 +35,7 @@ public class CPrivateChatHandler extends IMHandler{
             return;
         }
 
-        Chat.SPrivateChat.Builder sp = Chat.SPrivateChat.newBuilder();
+        Device.CDevice.Builder sp = Device.CDevice.newBuilder();
 //        sp.setContent(msg.getContent());
         sp.setContent("auth send to server "+msg.getContent());
         byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.SPRIVATECHAT, netid, Internal.Dest.Gate, dest);
