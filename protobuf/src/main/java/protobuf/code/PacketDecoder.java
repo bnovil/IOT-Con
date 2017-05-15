@@ -12,14 +12,13 @@ import protobuf.analysis.ParseMap;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/1/29.
+ * Created by lzq on 2016/1/29.
  */
 public class PacketDecoder extends ByteToMessageDecoder {
     private static final Logger logger = LoggerFactory.getLogger(PacketDecoder.class);
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in,
-                          List<Object> out) throws Exception {
+    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
 
         in.markReaderIndex();
 
@@ -56,7 +55,7 @@ public class PacketDecoder extends ByteToMessageDecoder {
             ThreeDES des = ctx.channel().attr(ClientAttr.ENCRYPT).get();
             byte[] bareByte = des.decrypt(inByte);*/
 
-            byte[] body= byteBuf.array();
+            byte[] body = byteBuf.array();
 
             Message msg = ParseMap.getMessage(ptoNum, body);
             out.add(msg);

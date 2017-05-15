@@ -19,16 +19,16 @@ import java.util.concurrent.atomic.AtomicLong;
  * 智能硬件设备与服务器的通信
  */
 public class ClientHandler extends SimpleChannelInboundHandler<Message> {
-    public static ChannelHandlerContext _gateClientConnection;
-
-    static int n = 0; //消息计数
+    private static ChannelHandlerContext _gateClientConnection;
+    //消息计数
+    private static int n = 0;
 
     private static final Logger logger = LoggerFactory.getLogger(ClientHandler.class);
-    String _userId = "";
-    boolean _verify = false;
+    private String _userId = "";
+    private boolean _verify = false;
     private static int count = 0;
 
-    public static AtomicLong increased = new AtomicLong(1);
+    private static AtomicLong increased = new AtomicLong(1);
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws IOException {
@@ -40,7 +40,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
         sendCLogin(ctx, _userId, passwd);
     }
 
-    void sendCRegister(ChannelHandlerContext ctx, String userid, String passwd) {
+    private void sendCRegister(ChannelHandlerContext ctx, String userid, String passwd) {
         Auth.CRegister.Builder cb = Auth.CRegister.newBuilder();
         cb.setUserid(userid);
         cb.setPasswd(passwd);
@@ -50,7 +50,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
         logger.info("send CRegister userid:{}", _userId);
     }
 
-    void sendCLogin(ChannelHandlerContext ctx, String userid, String passwd) {
+    private void sendCLogin(ChannelHandlerContext ctx, String userid, String passwd) {
         Auth.CLogin.Builder loginInfo = Auth.CLogin.newBuilder();
         loginInfo.setUserid(userid);
         loginInfo.setPasswd(passwd);
@@ -101,15 +101,17 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
             logger.info("{} receiced chat message: {}.Total:{}", _userId, ((Device.CDevice) msg).getContent(), ++count);
         }
 
-        //这样设置的原因是，防止两方都阻塞在输入上
-//        if(_verify) {
-//            sendMessage();
-//            Thread.sleep(Client.frequency);
-//        }
+
+         //这样设置的原因是，防止两方都阻塞在输入上
+
+        if(_verify) {
+            sendMessage();
+            Thread.sleep(Client.frequency);
+        }
         sendMessage();
     }
 
-    void sendMessage() {
+    private void sendMessage() {
 //        logger.info("WelCome To Face2face Chat Room, You Can Say Something Now: ");
 //        Scanner sc = new Scanner(System.in);
 //        String content = sc.nextLine();

@@ -1,7 +1,5 @@
 package gate;
-/**
- * Created by Qzy on 2016/1/28.
- */
+
 import gate.handler.GateServerHandler;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -65,7 +63,7 @@ public class GateServer {
         bootstrap.childOption(ChannelOption.TCP_NODELAY, true);
 
         bootstrap.childOption(ChannelOption.SO_REUSEADDR, true); //调试用
-        bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true); //心跳机制暂时使用TCP选项，之后再自己实现
+        bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
 
     }
 }
