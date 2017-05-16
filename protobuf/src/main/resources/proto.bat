@@ -1,5 +1,5 @@
-E:
-cd E:\LIU\face2face\protobuf\src\main\resources
+C:
+cd C:\Users\L\IdeaProjects\IOT-Con\protobuf\src\main\resources
 
 set OUT=../java
 set def_cli_java=(login chat)

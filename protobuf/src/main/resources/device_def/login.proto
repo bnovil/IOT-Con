@@ -1,4 +1,3 @@
-option java_package = "protobuf.generate.device.login";
 option java_outer_classname = "Auth";
 
 message CRegister {
