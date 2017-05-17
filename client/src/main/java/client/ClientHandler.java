@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.Utils;
 
-import protobuf.generate.device.chat.Device;
+import protobuf.generate.device.device.Device;
 import protobuf.generate.device.login.Auth;
 
 import java.io.IOException;
@@ -98,7 +98,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
             }
         } else if(msg instanceof Device.CDevice ) {
             System.out.println("client received: "+ ((Device.CDevice) msg).getContent());
-            logger.info("{} receiced chat message: {}.Total:{}", _userId, ((Device.CDevice) msg).getContent(), ++count);
+            logger.info("{} receiced device message: {}.Total:{}", _userId, ((Device.CDevice) msg).getContent(), ++count);
         }
 
 

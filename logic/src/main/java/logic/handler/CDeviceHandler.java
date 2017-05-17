@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.ParseRegistryMap;
 import protobuf.Utils;
-import protobuf.generate.device.chat.Device;
+import protobuf.generate.device.device.Device;
 import protobuf.generate.device.login.Auth;
 import protobuf.generate.internal.Internal;
 

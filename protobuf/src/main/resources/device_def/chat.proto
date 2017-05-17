@@ -1,4 +1,4 @@
-option java_package = "protobuf.generate.device.chat";
+option java_package = "protobuf.generate.device.device";
 option java_outer_classname = "Chat";
 
 message CPrivateChat {

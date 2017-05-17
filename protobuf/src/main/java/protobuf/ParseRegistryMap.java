@@ -1,7 +1,7 @@
 package protobuf;
 
 import protobuf.analysis.ParseMap;
-import protobuf.generate.device.chat.Device;
+import protobuf.generate.device.device.Device;
 import protobuf.generate.device.login.Auth;
 import protobuf.generate.internal.Internal;
 
@@ -34,6 +34,6 @@ public class ParseRegistryMap {
 //        ParseMap.register(SPRIVATECHAT, Chat.SPrivateChat::parseFrom, Chat.SPrivateChat.class);
 
         ParseMap.register(CPRIVATECHAT, Device.CDevice::parseFrom, Device.CDevice.class);
-        ParseMap.register(SPRIVATECHAT, Device.CDevice::parseFrom, Device.CDevice.class);
+        ParseMap.register(SPRIVATECHAT, Device.SPrivateChat::parseFrom, Device.SPrivateChat.class);
     }
 }

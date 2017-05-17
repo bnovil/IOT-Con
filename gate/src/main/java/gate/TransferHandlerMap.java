@@ -8,7 +8,7 @@ import gate.utils.ClientConnectionMap;
 import io.netty.buffer.ByteBuf;
 import protobuf.Utils;
 import protobuf.analysis.ParseMap;
-import protobuf.generate.device.chat.Device;
+import protobuf.generate.device.device.Device;
 import protobuf.generate.device.login.Auth;
 import protobuf.generate.internal.Internal;
 import org.slf4j.Logger;
