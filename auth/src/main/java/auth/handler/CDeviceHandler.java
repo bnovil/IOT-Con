@@ -39,9 +39,13 @@ public class CDeviceHandler extends IMHandler{
         Device.CDevice.Builder sp = Device.CDevice.newBuilder();
 //        sp.setContent(msg.getContent());
         sp.setContent("auth send to server "+msg.getContent());
+        sp.setSelf(msg.getSelf());
+
+        sp.setDest(msg.getDest());
 
 
-        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.SPRIVATECHAT, netid, Internal.Dest.Gate, dest);
+//        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.SPRIVATECHAT, netid, Internal.Dest.Gate, dest);
+        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.SPRIVATECHAT, netid, Internal.Dest.Gate, msg.getDest());
         _ctx.writeAndFlush(byteBuf);
 
         logger.info("message has send from {} to {}", msg.getSelf(), msg.getDest());

@@ -96,9 +96,9 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
                 default:
                     logger.info("Unknow code: {}", code);
             }
-        } else if(msg instanceof Device.CDevice ) {
-            System.out.println("client received: "+ ((Device.CDevice) msg).getContent());
-            logger.info("{} receiced device message: {}.Total:{}", _userId, ((Device.CDevice) msg).getContent(), ++count);
+        } else if(msg instanceof Device.SPrivateChat ) {
+            System.out.println("client received: "+ ((Device.SPrivateChat) msg).getContent());
+            logger.info("{} receiced device message: {}.Total:{}", _userId, ((Device.SPrivateChat) msg).getContent(), ++count);
         }
 
 
