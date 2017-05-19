@@ -9,7 +9,7 @@ import thirdparty.threedes.ThreeDES;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by Qzy on 2016/1/29.
+ * Created by lzq on 2016/1/29.
  * 客户端连接的封装类
  */
 
@@ -17,7 +17,7 @@ public class ClientConnection {
     private static final Logger logger = LoggerFactory.getLogger(ClientConnection.class);
     private static final AtomicLong netidGenerator = new AtomicLong(0);
     private String _userId;
-    private long _netId;
+    private long _netId;  //connection id
     private ChannelHandlerContext _ctx;
 
     public static AttributeKey<ThreeDES> ENCRYPT = AttributeKey.valueOf("encrypt");

@@ -26,7 +26,7 @@ public class CDeviceHandler extends IMHandler{
 //    protected void excute(Worker worker) throws TException {
     protected void excute(Worker worker)
     {
-        Device.CDevice msg = (Device.CDevice) _msg;
+        Device.DeviceMessage msg = (Device.DeviceMessage) _msg;
         ByteBuf byteBuf;
 
         String dest = msg.getDest();
@@ -36,18 +36,13 @@ public class CDeviceHandler extends IMHandler{
             return;
         }
 
-        Device.CDevice.Builder sp = Device.CDevice.newBuilder();
-//        sp.setContent(msg.getContent());
+        Device.Response.Builder sp = Device.Response.newBuilder();
         sp.setContent("auth send to server "+msg.getContent());
-        sp.setSelf(msg.getSelf());
 
-        sp.setDest(msg.getDest());
-
-
-//        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.SPRIVATECHAT, netid, Internal.Dest.Gate, dest);
-        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.SPRIVATECHAT, netid, Internal.Dest.Gate, msg.getDest());
+//        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.RESPONSE, netid, Internal.Dest.Gate, dest);
+        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.RESPONSE, netid, Internal.Dest.Gate, msg.getDest());
         _ctx.writeAndFlush(byteBuf);
 
-        logger.info("message has send from {} to {}", msg.getSelf(), msg.getDest());
+        logger.info("message has send from {} to {},{}", msg.getSelf(), msg.getDest(),msg.getContent());
     }
 }

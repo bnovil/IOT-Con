@@ -15,7 +15,7 @@ import thirdparty.thrift.generate.db.user.Account;
 import thirdparty.thrift.utils.DBOperator;
 
 /**
- * Created by win7 on 2016/3/2.
+ * Created by lzq on 2016/3/2.
  */
 public class CRegisterHandler extends IMHandler {
     private static final Logger logger = LoggerFactory.getLogger(CRegisterHandler.class);

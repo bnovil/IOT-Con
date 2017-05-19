@@ -36,8 +36,10 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
         String passwd = "123";
         _userId = Long.toString(increased.getAndIncrement());
 
-        sendCRegister(ctx, _userId, passwd);
+
+//        sendCRegister(ctx, _userId, passwd);
         sendCLogin(ctx, _userId, passwd);
+        //        sendMessage();
     }
 
     private void sendCRegister(ChannelHandlerContext ctx, String userid, String passwd) {
@@ -54,8 +56,8 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
         Auth.CLogin.Builder loginInfo = Auth.CLogin.newBuilder();
         loginInfo.setUserid(userid);
         loginInfo.setPasswd(passwd);
-        loginInfo.setPlatform("ios");
-        loginInfo.setAppVersion("1.0.0");
+//        loginInfo.setPlatform("ios");
+//        loginInfo.setAppVersion("1.0.0");
 
         ByteBuf byteBuf = Utils.pack2Client(loginInfo.build());
         ctx.writeAndFlush(byteBuf);
@@ -96,9 +98,10 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
                 default:
                     logger.info("Unknow code: {}", code);
             }
-        } else if(msg instanceof Device.SPrivateChat ) {
-            System.out.println("client received: "+ ((Device.SPrivateChat) msg).getContent());
-            logger.info("{} receiced device message: {}.Total:{}", _userId, ((Device.SPrivateChat) msg).getContent(), ++count);
+        } else if(msg instanceof Device.Response ) {
+
+            System.out.println("client received: "+ ((Device.Response) msg).getContent());
+            logger.info("{} receiced device message: {}.Total:{}", _userId, ((Device.Response) msg).getContent(), ++count);
         }
 
 
@@ -120,7 +123,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
 //        logger.info("{} Send Message: {} to {}", _userId, content, _friend);
 
 //        Chat.CPrivateChat.Builder cp = Chat.CPrivateChat.newBuilder();
-        Device.CDevice.Builder cd = Device.CDevice.newBuilder();
+        Device.DeviceMessage.Builder cd = Device.DeviceMessage.newBuilder();
         cd.setContent(content);
         cd.setSelf(_userId);
         cd.setDest(_userId);

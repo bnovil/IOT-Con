@@ -12,15 +12,16 @@ import protobuf.generate.internal.Internal;
  */
 public class DeviceBuildTest {
     public static void main(String[] args) {
-        Device.CDevice.Builder sp = Device.CDevice.newBuilder();
+        Device.DeviceMessage.Builder sp = Device.DeviceMessage.newBuilder();
 //        sp.setContent(msg.getContent());
         sp.setContent("auth send to server ");
         sp.setSelf("2");
         sp.setDest("3");
+        System.out.printf(sp.getContent());
 
-
-//        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.SPRIVATECHAT, netid, Internal.Dest.Gate, dest);
+//        byteBuf = Utils.pack2Server(sp.build(), ParseRegistryMap.RESPONSE, netid, Internal.Dest.Gate, dest);
         Message m = sp.build();
-        ByteBuf byteBuf = Utils.pack2Server(m, ParseRegistryMap.SPRIVATECHAT, 2, Internal.Dest.Gate, "1");
+        System.out.printf(sp.getContent());
+        ByteBuf byteBuf = Utils.pack2Server(m, ParseRegistryMap.RESPONSE, 2, Internal.Dest.Gate, "1");
     }
 }

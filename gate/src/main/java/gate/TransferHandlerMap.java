@@ -47,7 +47,7 @@ public class TransferHandlerMap {
                 logger.error("User not login.");
                 return;
             }
-            if (msg instanceof Device.CDevice) {
+            if (msg instanceof Device.DeviceMessage) {
                 byteBuf = Utils.pack2Server(msg, ParseMap.getPtoNum(msg), conn.getNetId(), Internal.Dest.Logic, conn.getUserId());
             }
             GateLogicConnectionHandler.getGatelogicConnection().writeAndFlush(byteBuf);
@@ -55,7 +55,7 @@ public class TransferHandlerMap {
 
         ClientMessage.registerTranferHandler(1000, t2Auth, Auth.CLogin.class);
         ClientMessage.registerTranferHandler(1001, t2Auth, Auth.CRegister.class);
-        ClientMessage.registerTranferHandler(1003, t2Logic, Device.CDevice.class);
+        ClientMessage.registerTranferHandler(1003, t2Logic, Device.DeviceMessage.class);
 
 //        ClientMessage.registerTranferHandler(1000, ClientMessage::transfer2Auth, Auth.CLogin.class);
 //        ClientMessage.registerTranferHandler(1001, ClientMessage::transfer2Auth, Auth.CRegister.class);

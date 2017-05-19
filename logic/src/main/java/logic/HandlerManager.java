@@ -52,6 +52,6 @@ public class HandlerManager {
 
     public static void initHandlers() {
         HandlerManager.register(Internal.Greet.class, GreetHandler.class);
-        HandlerManager.register(Device.CDevice.class, CDeviceHandler.class);
+        HandlerManager.register(Device.DeviceMessage.class, CDeviceHandler.class);
     }
 }

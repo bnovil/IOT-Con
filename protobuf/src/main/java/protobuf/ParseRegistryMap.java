@@ -18,8 +18,8 @@ public class ParseRegistryMap {
     public static final int CREGISTER = 1001;
     public static final int SRESPONSE = 1002;
 
-    public static final int CPRIVATECHAT = 1003;
-    public static final int SPRIVATECHAT = 1004;
+    public static final int DEVICEMESSAGE = 1003;
+    public static final int RESPONSE = 1004;
 
 
     public static void initRegistry() throws IOException {
@@ -30,10 +30,10 @@ public class ParseRegistryMap {
         ParseMap.register(CREGISTER, Auth.CRegister::parseFrom, Auth.CRegister.class);
         ParseMap.register(SRESPONSE, Auth.SResponse::parseFrom, Auth.SResponse.class);
 
-//        ParseMap.register(CPRIVATECHAT, Chat.CPrivateChat::parseFrom, Chat.CPrivateChat.class);
-//        ParseMap.register(SPRIVATECHAT, Chat.SPrivateChat::parseFrom, Chat.SPrivateChat.class);
+//        ParseMap.register(DEVICEMESSAGE, Chat.CPrivateChat::parseFrom, Chat.CPrivateChat.class);
+//        ParseMap.register(RESPONSE, Chat.SPrivateChat::parseFrom, Chat.SPrivateChat.class);
 
-        ParseMap.register(CPRIVATECHAT, Device.CDevice::parseFrom, Device.CDevice.class);
-        ParseMap.register(SPRIVATECHAT, Device.SPrivateChat::parseFrom, Device.SPrivateChat.class);
+        ParseMap.register(DEVICEMESSAGE, Device.DeviceMessage::parseFrom, Device.DeviceMessage.class);
+        ParseMap.register(RESPONSE, Device.Response::parseFrom, Device.Response.class);
     }
 }

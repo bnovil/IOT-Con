@@ -26,11 +26,11 @@ public class CDeviceHandler extends IMHandler{
 
     @Override
     protected void excute(Worker worker) throws TException {
-        Device.CDevice msg = (Device.CDevice) _msg;
+        Device.DeviceMessage msg = (Device.DeviceMessage) _msg;
         ByteBuf byteBuf = null;
 
         //转发给auth
-        byteBuf = Utils.pack2Server(_msg, ParseRegistryMap.CPRIVATECHAT, Internal.Dest.Auth, msg.getDest());
+        byteBuf = Utils.pack2Server(_msg, ParseRegistryMap.DEVICEMESSAGE, Internal.Dest.Auth, msg.getDest());
         LogicServerHandler.getAuthLogicConnection().writeAndFlush(byteBuf);
 
         //给发消息的人回应

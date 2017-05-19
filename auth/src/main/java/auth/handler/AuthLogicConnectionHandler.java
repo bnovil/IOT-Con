@@ -40,7 +40,7 @@ public class AuthLogicConnectionHandler extends SimpleChannelInboundHandler<Mess
         Message msg = ParseMap.getMessage(ptoNum, gt.getMsg().toByteArray());
 
         IMHandler handler = null;
-        if(msg instanceof Device.CDevice) {
+        if(msg instanceof Device.DeviceMessage) {
             handler = HandlerManager.getHandler(ptoNum, gt.getUserId(), -1L, msg, AuthServerHandler.getGateAuthConnection());
         } else {
             logger.error("Error Messgae Type: {}", msg.getClass());

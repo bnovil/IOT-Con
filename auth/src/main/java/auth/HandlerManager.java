@@ -54,7 +54,7 @@ public class HandlerManager {
         HandlerManager.register(Internal.Greet.class, GreetHandler.class);
         HandlerManager.register(Auth.CLogin.class, CLoginHandler.class);
         HandlerManager.register(Auth.CRegister.class, CRegisterHandler.class);
-        HandlerManager.register(Device.CDevice.class, CDeviceHandler.class);
+        HandlerManager.register(Device.DeviceMessage.class, CDeviceHandler.class);
 
     }
 }
