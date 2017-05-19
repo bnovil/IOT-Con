@@ -9,7 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import protobuf.generate.device.login.Auth;
+import protobuf.generate.device.Auth;
 import thirdparty.redis.utils.UserUtils;
 import thirdparty.thrift.generate.db.user.Account;
 import thirdparty.thrift.utils.DBOperator;

@@ -1,8 +1,8 @@
 package protobuf;
 
 import protobuf.analysis.ParseMap;
-import protobuf.generate.device.device.Device;
-import protobuf.generate.device.login.Auth;
+import protobuf.generate.device.Auth;
+import protobuf.generate.device.Device;
 import protobuf.generate.internal.Internal;
 
 import java.io.IOException;

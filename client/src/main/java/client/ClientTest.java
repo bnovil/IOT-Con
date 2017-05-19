@@ -1,6 +1,6 @@
 package client;
 
-import protobuf.generate.device.login.Auth;
+import protobuf.generate.device.Auth;
 
 /**
  * Created by L on 2017/5/16.

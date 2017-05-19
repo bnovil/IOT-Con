@@ -7,8 +7,8 @@ import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.analysis.ParseMap;
-import protobuf.generate.device.device.Device;
-import protobuf.generate.device.login.Auth;
+import protobuf.generate.device.Auth;
+import protobuf.generate.device.Device;
 import protobuf.generate.internal.Internal;
 
 import java.lang.reflect.Constructor;

@@ -4,7 +4,7 @@ import com.google.protobuf.Message;
 import io.netty.buffer.ByteBuf;
 import protobuf.ParseRegistryMap;
 import protobuf.Utils;
-import protobuf.generate.device.device.Device;
+import protobuf.generate.device.Device;
 import protobuf.generate.internal.Internal;
 
 /**

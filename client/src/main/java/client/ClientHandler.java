@@ -7,9 +7,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.Utils;
-
-import protobuf.generate.device.device.Device;
-import protobuf.generate.device.login.Auth;
+import protobuf.generate.device.Auth;
+import protobuf.generate.device.Device;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;

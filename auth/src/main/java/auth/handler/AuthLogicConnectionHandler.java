@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import protobuf.ParseRegistryMap;
 import protobuf.Utils;
 import protobuf.analysis.ParseMap;
-import protobuf.generate.device.device.Device;
+import protobuf.generate.device.Device;
 import protobuf.generate.internal.Internal;
 
 /**

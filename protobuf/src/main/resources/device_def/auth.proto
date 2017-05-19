@@ -1,0 +1,24 @@
+option java_outer_classname = "Auth";
+
+message CRegister {
+	required string userid = 1;
+	required string passwd  = 2;
+}
+
+message CLogin {
+	required string userid = 1;
+	required string passwd = 2;
+	optional string devic_type =3;
+}
+
+/*
+code：
+200 -- ok
+404 -- error
+300 -- dumplicated registery
+*/
+message SResponse {
+	required int32 code = 1;		    //return code
+	required string desc = 2;			//description
+}
+
