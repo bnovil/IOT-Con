@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.ParseRegistryMap;
 import protobuf.Utils;
+import protobuf.generate.device.Auth;
 import protobuf.generate.internal.Internal;
 
 /**
@@ -29,8 +30,11 @@ public class GateLogicConnectionHandler extends SimpleChannelInboundHandler<Mess
         //向logic发送Greet
         sendGreet2Logic();
     }
+
     @Override
-        protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
+        Auth.SResponse response = (Auth.SResponse) message;
+        logger.info("From Logic,code:{},description:{}", response.getCode(),response.getDesc());
 
     }
 

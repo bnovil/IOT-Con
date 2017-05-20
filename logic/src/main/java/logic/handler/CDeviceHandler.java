@@ -33,10 +33,10 @@ public class CDeviceHandler extends IMHandler{
         byteBuf = Utils.pack2Server(_msg, ParseRegistryMap.DEVICEMESSAGE, Internal.Dest.Auth, msg.getDest());
         LogicServerHandler.getAuthLogicConnection().writeAndFlush(byteBuf);
 
-        //给发消息的人回应
+        //回应
         Auth.SResponse.Builder sr = Auth.SResponse.newBuilder();
-        sr.setCode(300);
-        sr.setDesc("Server received message successed");
+        sr.setCode(200);
+        sr.setDesc("Logic server received message successed");
         byteBuf = Utils.pack2Client(sr.build());
         _ctx.writeAndFlush(byteBuf);
     }
