@@ -37,8 +37,8 @@ public class AuthStarter {
 
     static void configureAndStart(String[] args) throws ParseException {
 //        parseArgs(args);
-//        cfg = new File("E:\\LIU\\face2face\\auth\\src\\main\\resources\\auth.xml");
-        cfg = new File("C:\\Users\\L\\IdeaProjects\\IOT-Con\\auth\\src\\main\\resources\\auth.xml");
+        cfg = new File("E:\\LIU\\IOT-Con\\auth\\src\\main\\resources\\auth.xml");
+//        cfg = new File("C:\\Users\\L\\IdeaProjects\\IOT-Con\\auth\\src\\main\\resources\\auth.xml");
 
         try {
             //parse xml File and apply it
