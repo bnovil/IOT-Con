@@ -1,11 +1,7 @@
 package logic.starter;
 
-/**
- * Created by Dell on 2016/2/2.
- */
 
 import logic.LogicServer;
-import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -20,12 +16,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 
-
-
-/**
- * Created by Qzy on 2016/1/28.
- */
-
 public class LogicStarter {
     private static final Logger logger = LoggerFactory.getLogger(LogicStarter.class);
     private static File cfg = null;
@@ -34,15 +24,8 @@ public class LogicStarter {
     public static int workNum = 1;
 
     public static void main(String[] args) throws Exception {
-
-        configureAndStart(args);
-
-    }
-
-    static void configureAndStart(String[] args) throws ParseException {
-//        parseArgs(args);
-//        cfg = new File("E:\\LIU\\face2face\\logic\\src\\main\\resources\\logic.xml");
-        cfg = new File("C:\\Users\\L\\IdeaProjects\\IOT-Con\\logic\\src\\main\\resources\\logic.xml");
+        String filePath = LogicStarter.class.getResource("../../logic.xml").getPath();
+        cfg = new File(filePath);
 
         try {
             //parse xml File and apply it
@@ -82,44 +65,6 @@ public class LogicStarter {
             logger.error("init cfg error");
             e.printStackTrace();
         }
-        //init log
+
     }
-
-    static void parseArgs(String[] args) throws ParseException {
-        // Create a Parser
-        CommandLineParser parser = new BasicParser( );
-        Options options = new Options( );
-        options.addOption("h", "help", false, "Print this usage information");
-        options.addOption("c", "cfg", true, "config Absolute Path");
-        options.addOption("l", "log", true, "log configuration");
-
-        // Parse the program arguments
-        CommandLine commandLine = parser.parse( options, args );
-        // Set the appropriate variables based on supplied options
-
-        if( commandLine.hasOption('h') ) {
-            printHelpMessage();
-            System.exit(0);
-        }
-        if( commandLine.hasOption('c') ) {
-            cfg = new File(commandLine.getOptionValue('c'));
-        } else {
-            printHelpMessage();
-            System.exit(0);
-        }
-        if( commandLine.hasOption('l') ) {
-            log = new File(commandLine.getOptionValue('l'));
-        } else {
-            printHelpMessage();
-            System.exit(0);
-        }
-    }
-
-    static void printHelpMessage() {
-        System.out.println( "Change the xml File and Log.XML Path to the right Absolute Path base on your project Location in your computor");
-        System.out.println("Usage example: ");
-        System.out.println( "java -cfg D:\\MyProject\\face2face\\logic\\src\\main\\resources\\logic.xml  -log D:\\MyProject\\face2face\\logic\\src\\main\\resources\\log.xml");
-        System.exit(0);
-    }
-
 }

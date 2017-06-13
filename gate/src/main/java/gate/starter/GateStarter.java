@@ -17,10 +17,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 
-/**
- * Created by Qzy on 2016/1/28.
- */
-
 public class GateStarter {
     private static final Logger logger = LoggerFactory.getLogger(GateStarter.class);
     private static File cfg = null;
@@ -28,15 +24,8 @@ public class GateStarter {
     private static int gateId;
 
     public static void main(String[] args) throws Exception {
-
-        configureAndStart(args);
-
-    }
-
-    static void configureAndStart(String[] args) throws ParseException {
-//        parseArgs(args);
-//        cfg = new File("E:\\LIU\\face2face\\gate\\src\\main\\resources\\gate.xml");
-        cfg = new File("C:\\Users\\L\\IdeaProjects\\IOT-Con\\gate\\src\\main\\resources\\gate.xml");
+        String filePath = GateStarter.class.getResource("../../gate.xml").getPath();
+        cfg = new File(filePath);
 
         try {
             //parse xml File and apply it
@@ -89,43 +78,7 @@ public class GateStarter {
             logger.error("init cfg error");
             e.printStackTrace();
         }
-    }
 
-    static void parseArgs(String[] args) throws ParseException {
-        // Create a Parser
-        CommandLineParser parser = new BasicParser( );
-        Options options = new Options( );
-        options.addOption("h", "help", false, "Print this usage information");
-        options.addOption("c", "cfg", true, "config Absolute Path");
-        options.addOption("l", "log", true, "log configuration");
-
-        // Parse the program arguments
-        CommandLine commandLine = parser.parse( options, args );
-        // Set the appropriate variables based on supplied options
-
-        if( commandLine.hasOption('h') ) {
-            printHelpMessage();
-            System.exit(0);
-        }
-        if( commandLine.hasOption('c') ) {
-            cfg = new File(commandLine.getOptionValue('c'));
-        } else {
-            printHelpMessage();
-            System.exit(0);
-        }
-        if( commandLine.hasOption('l') ) {
-            log = new File(commandLine.getOptionValue('l'));
-        } else {
-            printHelpMessage();
-            System.exit(0);
-        }
-    }
-
-    static void printHelpMessage() {
-        System.out.println( "Change the xml File and Log.XML Path to right Absolute Path base on your project Location in your computor");
-        System.out.println("Usage example: ");
-        System.out.println( "java -cfg D:\\MyProject\\face2face\\gate\\src\\main\\resources\\auth.xml  -log D:\\MyProject\\face2face\\gate\\src\\main\\resources\\log.xml");
-        System.exit(0);
     }
 
     public static int getGateId() {
