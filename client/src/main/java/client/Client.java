@@ -18,8 +18,9 @@ import protobuf.code.PacketEncoder;
 public class Client {
     static final String HOST = System.getProperty("host", "127.0.0.1");
     static final int PORT = Integer.parseInt(System.getProperty("port", "9090"));
-    public static final int clientNum = Integer.parseInt(System.getProperty("size", "1"));
-    public static final int frequency = 2000;  //ms
+//    public static final int clientNum = Integer.parseInt(System.getProperty("size", "1"));
+    public static final int clientNum = 10;
+    public static final int frequency = 100;  //ms
 
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
@@ -46,9 +47,9 @@ public class Client {
             });
 
         // Start the client.
-//        for (int i = 1; i <= clientNum; i++) {
-//            startConnection(b, i);
-//        }
+        for (int i = 1; i <= clientNum; i++) {
+            startConnection(b, i);
+        }
         startConnection(b, 1);
     }
 
