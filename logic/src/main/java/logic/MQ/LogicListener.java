@@ -1,4 +1,4 @@
-package gate.MQUtil;
+package logic.MQ;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -8,10 +8,10 @@ import javax.jms.*;
 /**
  * @Author:lzq
  * @Discription
- * @Date: Created on 2017/6/9.
+ * @Date: Created on 2017/6/15.
  * @Modified By:
  */
-public class GateListener extends Thread {
+public class LogicListener implements Runnable {
     ConnectionFactory connectionFactory;
     Connection connection = null;
     Session session;
@@ -29,25 +29,17 @@ public class GateListener extends Thread {
             destination = session.createQueue(ServerConstants.Gate_Logic);
             consumer = session.createConsumer(destination);
             consumer.setMessageListener(new MessageListener() {
-                    @Override
-                    public void onMessage(Message m) {
-                        TextMessage textMsg = (TextMessage) m;
-                        try {
-                            System.out.println(textMsg.getText());
-                        } catch (JMSException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+                                            @Override
+                                            public void onMessage(Message m) {
+                                                TextMessage textMsg = (TextMessage) m;
+                                                try {
+                                                    System.out.println(textMsg.getText());
+                                                } catch (JMSException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
             );
-//            while(true){
-//                TextMessage message = (TextMessage) consumer.receive(100000);
-//                if(null != message){
-//                    System.out.println(message.getText());
-//                }else{
-//                    break;
-//                }
-//            }
         } catch (JMSException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -61,9 +53,8 @@ public class GateListener extends Thread {
             }
         }
     }
-
     public static void main(String[] args) {
-        GateListener gateListener = new GateListener();
-        gateListener.start();
+        LogicListener gateListener = new LogicListener();
+        new Thread(gateListener).start();
     }
 }

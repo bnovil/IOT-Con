@@ -20,14 +20,13 @@ public class ActiveMQUtil {
         MessageProducer messageProducer;
         //ConnectionFactory
         connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnection.DEFAULT_USER, ActiveMQConnection.DEFAULT_PASSWORD,
-                "tcp://localhost:61616");
+                ServerConstants.BROKER_URL);
 
         try {
             connection = connectionFactory.createConnection();
             connection.start();
-
             session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
-            destination = session.createQueue(ServerQueue.Gate_Logic);
+            destination = session.createQueue(ServerConstants.Gate_Logic);
 
             messageProducer = session.createProducer(destination);
             messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
@@ -55,7 +54,10 @@ public class ActiveMQUtil {
     }
     public static void main(String [] args){
         ActiveMQUtil activeMQUtil= new ActiveMQUtil();
-        activeMQUtil.senderMessage("This is a producer message");
+        for (int i = 0; i < 10; i++) {
+            activeMQUtil.senderMessage("This is a producer message " + i);
+        }
+
     }
 }
 

@@ -8,6 +8,7 @@ IoT devices commuciation
 Gate处理与设备间的通信，根据消息类型将数据转发给Auth或Gate, Auth处理设备注册、认证，Logic处理
 不同设备之间通信的消息。具体处理业务交由worker进行
 
+---
 启动项目
 1.配置Gate, Auth, Logic目录下对应的xml文件，gate.xml, auth.xml, logic.xml。设置好相应的ip地址和端口，
 auth.xml和 logic.xml中配置redis的地址。<br>

@@ -25,7 +25,7 @@ public class LogicGateReceiver{
             connection = connectionFactory.createConnection();
             connection.start();
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            destination = session.createQueue(ServerQueue.Gate_Logic);
+            destination = session.createQueue(ServerConstants.Gate_Logic);
             consumer = session.createConsumer(destination);
             while(true){
                 TextMessage message = (TextMessage) consumer.receive(100000);
