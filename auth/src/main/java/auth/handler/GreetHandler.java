@@ -21,11 +21,10 @@ public class GreetHandler extends IMHandler {
 
     /**
      *
-     * @param worker
      * @throws TException
      */
     @Override
-    protected void excute(Worker worker) throws TException {
+    protected void excute() throws TException {
         AuthServerHandler.setGateAuthConnection(_ctx);
         logger.info("[Gate-Auth] connection is established");
     }

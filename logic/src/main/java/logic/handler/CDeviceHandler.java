@@ -25,7 +25,7 @@ public class CDeviceHandler extends IMHandler{
     }
 
     @Override
-    protected void excute(Worker worker) throws TException {
+    protected void excute() throws TException {
         Device.DeviceMessage msg = (Device.DeviceMessage) _msg;
         ByteBuf byteBuf = null;
 

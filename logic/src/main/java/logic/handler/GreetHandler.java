@@ -20,7 +20,7 @@ public class GreetHandler extends IMHandler {
     }
 
     @Override
-    protected void  excute(Worker worker) throws TException {
+    protected void  excute() throws TException {
         Internal.Greet msg = (Internal.Greet)_msg;
         Internal.Greet.From from = msg.getFrom();
 

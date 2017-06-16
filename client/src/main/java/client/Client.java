@@ -20,7 +20,7 @@ public class Client {
     static final int PORT = Integer.parseInt(System.getProperty("port", "9090"));
 //    public static final int clientNum = Integer.parseInt(System.getProperty("size", "1"));
     public static final int clientNum = 10;
-    public static final int frequency = 100;  //ms
+    public static final int frequency = 1000;  //ms
 
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
 

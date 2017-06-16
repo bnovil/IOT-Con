@@ -25,7 +25,7 @@ public class CLoginHandler extends IMHandler {
     }
 
     @Override
-    protected void excute(Worker worker) throws TException {
+    protected void excute() throws TException {
         Auth.CLogin msg = (Auth.CLogin)_msg;
         Account account;
 

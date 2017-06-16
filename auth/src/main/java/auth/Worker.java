@@ -41,7 +41,7 @@ public class Worker extends Thread {
             try {
                 assert handler != null;
                 handler._jedis = AuthStarter._redisPoolManager.getJedis();
-                handler.excute(this);
+                handler.excute();
             } catch (Exception e) {
                 logger.error("Caught Exception");
             } finally {

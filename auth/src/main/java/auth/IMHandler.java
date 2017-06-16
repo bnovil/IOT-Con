@@ -22,5 +22,5 @@ public abstract class IMHandler {
         _ctx = ctx;
     }
 
-    protected abstract void excute(Worker worker) throws TException;
+    protected abstract void excute() throws TException;
 }
