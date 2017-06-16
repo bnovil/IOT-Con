@@ -30,9 +30,6 @@ public class ParseRegistryMap {
         ParseMap.register(CREGISTER, Auth.CRegister::parseFrom, Auth.CRegister.class);
         ParseMap.register(SRESPONSE, Auth.SResponse::parseFrom, Auth.SResponse.class);
 
-//        ParseMap.register(DEVICEMESSAGE, Chat.CPrivateChat::parseFrom, Chat.CPrivateChat.class);
-//        ParseMap.register(RESPONSE, Chat.SPrivateChat::parseFrom, Chat.SPrivateChat.class);
-
         ParseMap.register(DEVICEMESSAGE, Device.DeviceMessage::parseFrom, Device.DeviceMessage.class);
         ParseMap.register(RESPONSE, Device.Response::parseFrom, Device.Response.class);
     }
