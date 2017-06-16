@@ -23,7 +23,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
     private static int n = 0;
 
     private static final Logger logger = LoggerFactory.getLogger(ClientHandler.class);
-    private String _userId = "";
+    private String _deviceId = "";
     private boolean _verify = false;
     private static int count = 0;
 
@@ -33,11 +33,11 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
     public void channelActive(ChannelHandlerContext ctx) throws IOException {
         _gateClientConnection = ctx;
         String passwd = "123";
-        _userId = Long.toString(increased.getAndIncrement());
+        _deviceId = Long.toString(increased.getAndIncrement());
 
 
-//        sendCRegister(ctx, _userId, passwd);
-        sendCLogin(ctx, _userId, passwd);
+//        sendCRegister(ctx, _deviceId, passwd);
+        sendCLogin(ctx, _deviceId, passwd);
         //        sendMessage();
     }
 
@@ -48,7 +48,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
 
         ByteBuf byteBuf = Utils.pack2Client(cb.build());
         ctx.writeAndFlush(byteBuf);
-        logger.info("send CRegister userid:{}", _userId);
+        logger.info("send CRegister userid:{}", _deviceId);
     }
 
     private void sendCLogin(ChannelHandlerContext ctx, String userid, String passwd) {
@@ -60,53 +60,39 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
 
         ByteBuf byteBuf = Utils.pack2Client(loginInfo.build());
         ctx.writeAndFlush(byteBuf);
-        logger.info("send CLogin userid:{}", _userId);
+        logger.info("send CLogin userid:{}", _deviceId);
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message msg) throws Exception {
         logger.info("received message: {}", msg.getClass());
-        if(msg instanceof Auth.SResponse) {
+        if (msg instanceof Auth.SResponse) {
             Auth.SResponse sp = (Auth.SResponse) msg;
             int code = sp.getCode();
             String desc = sp.getDesc();
             switch (code) {
-                //登录成功
+                //device verified
                 case Common.VERYFY_PASSED:
-                    logger.info("Login succeed, description: {}", desc);
+                    logger.info("device verified, description: {}", desc);
                     _verify = true;
                     break;
-                //登录账号不存在
-                case Common.ACCOUNT_INEXIST:
-                    logger.info("Account inexsit, description: {}", desc);
-                    break;
-                //登录账号或密码错误
-                case Common.VERYFY_ERROR:
-                    logger.info("Account or passwd Error, description: {}", desc);
-                    break;
-                //账号已被注册
-                case Common.ACCOUNT_DUMPLICATED:
-                    logger.info("Dumplicated registry, description: {}", desc);
-                    break;
-                //注册成功
+                //device registry
                 case Common.REGISTER_OK:
-                    logger.info("User registerd successd, description: {}", desc);
+                    logger.info("device registerd successd, description: {}", desc);
                     break;
                 case Common.Msg_SendSuccess:
-                    logger.info("Chat Message Send Successed, description: {}", desc);
+                    logger.info("Message Send Successed, description: {}", desc);
                 default:
                     logger.info("Unknow code: {}", code);
             }
-        } else if(msg instanceof Device.Response ) {
+        } else if (msg instanceof Device.Response) {
 
-            System.out.println("client received: "+ ((Device.Response) msg).getContent());
-            logger.info("{} receiced device message: {}.Total:{}", _userId, ((Device.Response) msg).getContent(), ++count);
+            System.out.println("device received: " + ((Device.Response) msg).getContent());
+            logger.info("{} receiced device message: {}.Total:{}", _deviceId, ((Device.Response) msg).getContent(), ++count);
         }
 
-
-         //这样设置的原因是，防止两方都阻塞在输入上
-
-        if(_verify) {
+        //这样设置的原因是，防止两方都阻塞在输入上
+        if (_verify) {
             sendMessage();
             Thread.sleep(Client.frequency);
         }
@@ -114,18 +100,12 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
     }
 
     private void sendMessage() {
-//        logger.info("WelCome To Face2face Chat Room, You Can Say Something Now: ");
-//        Scanner sc = new Scanner(System.in);
-//        String content = sc.nextLine();
         n++;
-        String content = "Hello, I am Tom! Message number: "+n;
-//        logger.info("{} Send Message: {} to {}", _userId, content, _friend);
-
-//        Chat.CPrivateChat.Builder cp = Chat.CPrivateChat.newBuilder();
+        String content = "This is device:" + n + ", Message number: " + n;
         Device.DeviceMessage.Builder cd = Device.DeviceMessage.newBuilder();
         cd.setContent(content);
-        cd.setSelf(_userId);
-        cd.setDest(_userId);
+        cd.setSelf(_deviceId);
+        cd.setDest(_deviceId);
 
         ByteBuf byteBuf = Utils.pack2Client(cd.build());
         _gateClientConnection.writeAndFlush(byteBuf);
@@ -133,7 +113,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Message> {
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
-        //ctx.flush();
+        ctx.flush();
     }
 
     @Override
