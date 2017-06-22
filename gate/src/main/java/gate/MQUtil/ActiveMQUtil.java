@@ -1,7 +1,11 @@
 package gate.MQUtil;
 
+import com.google.protobuf.*;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQBytesMessage;
+import org.apache.activemq.command.ActiveMQObjectMessage;
+import protobuf.generate.device.Device;
 
 import javax.jms.*;
 
@@ -12,7 +16,7 @@ import javax.jms.*;
  * @Modified By:
  */
 public class ActiveMQUtil {
-    public static void senderMessage(String message) {
+    public static void sendMessage(byte[] message) {
         ConnectionFactory connectionFactory;
         Connection connection = null;
         Session session;
@@ -48,15 +52,26 @@ public class ActiveMQUtil {
 
     }
 
-    public static void sendMessage(Session session, MessageProducer messageProducer, String messages) throws JMSException {
-        TextMessage message = session.createTextMessage(messages);
-        messageProducer.send(message);
+    public static void sendMessage(Session session, MessageProducer messageProducer, byte[] messages) throws JMSException {
+//        Message message = session.createMessage(messages);
+        ActiveMQBytesMessage bytesMessage = (ActiveMQBytesMessage) session.createBytesMessage();
+        bytesMessage.writeBytes(messages);
+        messageProducer.send(bytesMessage);
     }
+
     public static void main(String [] args){
         ActiveMQUtil activeMQUtil= new ActiveMQUtil();
-        for (int i = 0; i < 10; i++) {
-            activeMQUtil.senderMessage("This is a producer message " + i);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            activeMQUtil.senderMessage(("This is a producer message " + i).getBytes());
+//        }
+        Device.DeviceMessage.Builder deviceMessage = Device.DeviceMessage.newBuilder();
+//        sp.setContent(msg.getContent());
+        deviceMessage.setContent("gate send to logic ");
+        deviceMessage.setSelf("2");
+        deviceMessage.setDest("3");
+
+        byte[] m = deviceMessage.build().toByteArray();
+        sendMessage(m);
 
     }
 }

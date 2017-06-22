@@ -2,6 +2,8 @@ package logic.MQ;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQBytesMessage;
+import protobuf.generate.device.Device;
 
 import javax.jms.*;
 
@@ -29,15 +31,25 @@ public class LogicListener implements Runnable {
             destination = session.createQueue(ServerConstants.Gate_Logic);
             consumer = session.createConsumer(destination);
             consumer.setMessageListener(new MessageListener() {
-                                            @Override
-                                            public void onMessage(Message m) {
-                                                TextMessage textMsg = (TextMessage) m;
-                                                try {
-                                                    System.out.println(textMsg.getText());
-                                                } catch (JMSException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
+//                                            @Override
+//                                            public void onMessage(Message m) {
+//                                                TextMessage textMsg = (TextMessage) m;
+//                                                try {
+//                                                    System.out.println(textMsg.getText());
+//                                                } catch (JMSException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//                                            }
+                @Override
+                public void onMessage(Message m) {
+                    if(m instanceof ActiveMQBytesMessage){
+                        ActiveMQBytesMessage bytesMessage = (ActiveMQBytesMessage) m;
+//                        byte[] temp =  bytesMessage.readBytes();
+//
+//                        Device.DeviceMessage.parseFrom(bytesMessage)
+                    }
+
+                }
                                         }
             );
         } catch (JMSException e) {
