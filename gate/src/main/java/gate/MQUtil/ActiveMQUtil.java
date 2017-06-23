@@ -16,7 +16,7 @@ import javax.jms.*;
  * @Modified By:
  */
 public class ActiveMQUtil {
-    public static void sendMessage(byte[] message) {
+    public static void send(byte[] message) {
         ConnectionFactory connectionFactory;
         Connection connection = null;
         Session session;
@@ -71,7 +71,7 @@ public class ActiveMQUtil {
         deviceMessage.setDest("3");
 
         byte[] m = deviceMessage.build().toByteArray();
-        sendMessage(m);
+        send(m);
 
     }
 }

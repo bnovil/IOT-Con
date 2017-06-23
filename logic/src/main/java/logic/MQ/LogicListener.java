@@ -1,5 +1,6 @@
 package logic.MQ;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQBytesMessage;
@@ -30,28 +31,8 @@ public class LogicListener implements Runnable {
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             destination = session.createQueue(ServerConstants.Gate_Logic);
             consumer = session.createConsumer(destination);
-            consumer.setMessageListener(new MessageListener() {
-//                                            @Override
-//                                            public void onMessage(Message m) {
-//                                                TextMessage textMsg = (TextMessage) m;
-//                                                try {
-//                                                    System.out.println(textMsg.getText());
-//                                                } catch (JMSException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                            }
-                @Override
-                public void onMessage(Message m) {
-                    if(m instanceof ActiveMQBytesMessage){
-                        ActiveMQBytesMessage bytesMessage = (ActiveMQBytesMessage) m;
-//                        byte[] temp =  bytesMessage.readBytes();
-//
-//                        Device.DeviceMessage.parseFrom(bytesMessage)
-                    }
+            consumer.setMessageListener(new GateMessageListner());
 
-                }
-                                        }
-            );
         } catch (JMSException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -65,8 +46,38 @@ public class LogicListener implements Runnable {
             }
         }
     }
+
     public static void main(String[] args) {
         LogicListener gateListener = new LogicListener();
         new Thread(gateListener).start();
     }
+
+    class GateMessageListner implements MessageListener {
+
+        @Override
+        public void onMessage(Message m) {
+            if (m instanceof ActiveMQBytesMessage) {
+                ActiveMQBytesMessage bytesMessage = (ActiveMQBytesMessage) m;
+                int len ;
+                byte[] temp = null;
+                try {
+                    len = (int) bytesMessage.getBodyLength();
+                    temp = new byte[len];
+                    bytesMessage.readBytes(temp);
+
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    Device.DeviceMessage d= Device.DeviceMessage.parseFrom(temp);
+                    System.out.println(d.getContent());
+                } catch (InvalidProtocolBufferException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
 }
